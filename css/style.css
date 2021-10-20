@@ -37,9 +37,6 @@
   background: rgb(9, 93, 248);
 }
 .burger-menu {
-  position: absolute;
-  width: 100%;
-  margin: 5px auto;
   background: transparent;
   height: 40px;
   width: 40px;
