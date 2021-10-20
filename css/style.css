@@ -8,19 +8,19 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 }
 /* Make .nav-bar a relative container for an absolute child */
 .nav-bar {
+  text-align: center;
   position: relative;
   height: 40px;
   background: rgb(58, 183, 224);
-  border-bottom: 1px solid;
+  border-bottom: 1px #000 solid;
+  color: #fff;
 }
 /* Position .nav-list absolutely to the parent container; 0 from top; 0 from left of parent */
 .nav-list {
   position: absolute;
-  top: 15px;
+  top: 20px;
   height: 0;
   /* Text formatting */
-  text-align: center;
-  color: white;
   line-height: 45px;
   /* Make the list 100% width of parent container */
   width: 100%;
@@ -53,14 +53,14 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 }
 /* Round the last .nav-link so it fits the .nav-list when hovered over */
 .nav-link:last-child {
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 20px 20px;
 }
 /* Remove background of the button and make it white */
 .burger-menu {
   background: transparent;
   height: 40px;
   width: 40px;
-  color: white;
+  color: #fff;
 }
 /* Change color of the burger when hovered over */
 .burger-menu:hover {
@@ -99,4 +99,4 @@ Target the screen of the device and apply the style when min-width is 500px */
   .nav-link:last-child {
     border-radius: 0;
   }
-}
+}  
