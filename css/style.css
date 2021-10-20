@@ -29,6 +29,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   flex-flow: column;
   /* Transition for all attributes (specifically height and top) in .6 ease-in and out */
   transition: all .6s ease;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
 }
 /* The position of .nav-list when it's opened after clicking the hamburger */
 .open {
@@ -49,6 +50,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 }
 /* Change background when hovering over a .nav-link */
 .nav-link:hover {
+  cursor: pointer;
   background: rgb(9, 93, 248);
 }
 /* Round the last .nav-link so it fits the .nav-list when hovered over */
@@ -61,6 +63,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   height: 40px;
   width: 40px;
   color: #fff;
+  cursor: pointer;
 }
 /* Change color of the burger when hovered over */
 .burger-menu:hover {
