@@ -19,7 +19,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 .nav-list {
   position: absolute;
   top: 20px;
-  height: 0;
+  height: 0px;
   /* Text formatting */
   line-height: 45px;
   /* Make the list 100% width of parent container */
@@ -31,7 +31,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   transition: all .6s ease;
 }
 /* The position of .nav-list when it's opened after clicking the hamburger */
-.nav-list.open {
+.open {
   top: 40px;
   height: 180px;
   background: rgb(58, 183, 224);
@@ -44,7 +44,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   height: 45px;
 }
 /* Show .nav-link when .nav-list is opened */
-.nav-list.open > .nav-link {
+.open > .nav-link {
   display: block;
 }
 /* Change background when hovering over a .nav-link */
@@ -82,7 +82,7 @@ Target the screen of the device and apply the style when min-width is 500px */
     display: none;
   }
   /* Position .nav-list so it fits into the .nav-bar instead of below it */
-  .nav-list, .nav-list.open {
+  .nav-list, .open {
     top: 0;
     height: 100%;
     /* Change flex-direction to row */
