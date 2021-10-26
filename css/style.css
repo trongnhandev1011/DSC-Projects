@@ -104,6 +104,9 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 .cart-text {
   display: none;
 }
+.cart:hover .cart-text, .cart:hover .fas.fa-cart-arrow-down {
+  color: #000;
+}
 /* Formatting for the main area of the website */
 main {
   margin: 10px;
