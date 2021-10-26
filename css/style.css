@@ -6,19 +6,24 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   padding: 0;
   border: 0;
 }
-/* Make .nav-bar a relative container for an absolute child */
+/* Make .nav-bar a relative container for absolute childs */
 .nav-bar {
   position: relative;
-  height: 40px;
-  background: rgb(224, 167, 11);
-  border-bottom: 1px #000 solid;
-  color: #fff;
+  border-top: 1px #000 solid;
 }
-/* Position .nav-list absolutely to the parent container; 0 from top; 0 from left of parent */
+.fries {
+  height:50px;
+  font-size: 2em;
+  background: rgb(224, 167, 11);
+  text-align: center;
+  line-height: 50px;
+  color: white;
+}
+/* Position .nav-list absolutely to the parent container */
 .nav-list {
   position: absolute;
-  top: 40px;
   /* Text formatting */
+  color: #fff;
   text-align: center;
   line-height: 45px;
   /* Make the list 100% width of parent container */
@@ -27,7 +32,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   display: flex;
   flex-flow: column;
   /* Transition for all attributes (specifically height and top) in .6 ease-in and out */
-  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.1);
 }
 /* Hide .nav-link when .nav-list is closed */
 .nav-link {
@@ -47,13 +52,13 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   height: 45px;
   background: rgb(9, 93, 248);
 }
-/* Remove background of the button and make it white */
+/* Remove background of the button and make it white; position it absolutely -40px from the top (go up by 40px) to fit in the header French Fries */
 .burger-menu {
   position: absolute;
-  top: 0;
+  top: 1px;
   background: transparent;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   color: #fff;
   cursor: pointer;
 }
@@ -73,6 +78,32 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 .salad {
   background: green;
 }
+/* Shopping cart */
+.cart {
+  position: absolute;
+  top: 16px;
+  right: 0px;
+  height: 40px;
+  width: 45px;
+  font-size: 1.1em;
+  color: white;
+}
+.cart-item-count {
+  font-size: 0.8em;
+  position: absolute;
+  width: 20px;
+  height: 18px;
+  top: -7px;
+  left: 15px;
+  border-radius: 50%;
+  /* Text formatting */
+  background-color: #A52A2A;
+  text-align: center;
+  line-height: 18px;
+}
+.cart-text {
+  display: none;
+}
 /* Formatting for the main area of the website */
 main {
   margin: 10px;
@@ -81,9 +112,45 @@ main {
 p {
   margin: 10px auto;
 }
-.fries {
-  text-align: center;
-  line-height: 40px;
+/* Card formatting */
+.card-container {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
+.card {
+  position: relative;
+  margin: 12px;
+  width: 300px;
+  height: 400px;
+  border: 1px solid;
+  box-shadow: 4px 5px 5px rgba(0, 0, 0 , 0.3);
+}
+.card-img {
+  max-width: 100%;
+  height: auto;
+}
+.card-body {
+  padding: 5px 10px;
+}
+.price {
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+}
+.card-buy {
+  width: 120px;
+  height: 30px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: orange;
+  border-radius: 10px;
+}
+.card-buy:hover {
+  color:white;
+  background: lightcoral;
 }
 /* Desktop after mobile
 Target the screen of the device and apply the style when min-width is 500px */
@@ -92,17 +159,14 @@ Target the screen of the device and apply the style when min-width is 500px */
   .burger-menu {
     display: none;
   }
-  .nav-bar {
-    height: 80px;
-    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.1);
-  }
-  /* Position .nav-list so it fits into the .nav-bar instead of below it */
+  /* Position .nav-list so it takes takes up space below French Fries */
   .nav-list, .open {
-    top: 40px;
+    position: initial;
     height: 40px;
     /* Change flex-direction to row */
     flex-flow: row;
     justify-content: space-around;
+
   }
   /* Show the .nav-link and size them to 25% of the parent's width; allow them to shrink and grow accordingly */
   .nav-link {
@@ -114,5 +178,13 @@ Target the screen of the device and apply the style when min-width is 500px */
   /* Remove rounded corner on the last-child of .nav-link for consistency */
   .nav-link:last-child {
     border-radius: 0;
+  }
+  .cart {
+    width: 85px;
+
+  }
+  .cart-text {
+    display: initial;
+    margin-left: 14px;
   }
 }  
