@@ -2,36 +2,42 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Hamburger Responsive Demo</title>
+		<title>Making Money</title>
 		<!-- Set the viewport and scaling for your webpage -->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script
 			src="https://kit.fontawesome.com/3449a8ce9f.js"
 			crossorigin="anonymous"
 		></script>
-		<link rel="icon" href="img/hamburger_53876-25481-removebg-preview.png " />
+		<link rel="icon" href="img/hamburger_53876-25481-removebg-preview.png" />
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 		<header>
-			<nav class="nav-bar">
+			<div class="top-bar">
 				<h1 class="fries">French Fries</h1>
-				<button class="burger-menu"><i class="fas fa-bars"></i></button>
-				<ul class="nav-list">
-					<li class="nav-link bun"><a>Bun</a></li>
-					<li class="nav-link tomato"><a>Tomato</a></li>
-					<li class="nav-link patty"><a>Patty</a></li>
-					<li class="nav-link salad"><a>Salad</a></li>
-					<li class="nav-link bun">More Buns</li>
-				</ul>
+				<nav>
+					<button class="burger-menu"><i class="fas fa-bars"></i></button>
+					<ul class="nav-list">
+						<li class="nav-link bun"><a>Bun</a></li>
+						<li class="nav-link tomato"><a>Tomato</a></li>
+						<li class="nav-link patty"><a>Patty</a></li>
+						<li class="nav-link salad"><a>Salad</a></li>
+						<li class="nav-link bun">More Buns</li>
+					</ul>
+				</nav>
 				<div class="cart">
-					<i class="fas fa-cart-arrow-down"></i>
-					<div class="cart-item-count">0</div>
-					<span class="cart-text">Cart</span>
+					<button class="cart-menu">
+						<i class="fas fa-cart-arrow-down"></i>
+						<div class="cart-item-count">0</div>
+						<span class="cart-text">Cart</span>
+					</button>
+					<ul class="cart-list"></ul>
 				</div>
-			</nav>
+			</div>
 		</header>
 		<main>
+			<div class="overlay"></div>
 			<h1>This is a header</h1>
 			<p class="main-article">
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum odit
@@ -46,6 +52,19 @@
 				consequatur asperiores.
 			</p>
 			<div class="card-container">
+				<div class="card">
+					<img class="card-img" srcset="https://picsum.photos/300/300" />
+					<div class="card-body">
+						<h3>This is an item</h3>
+						<div class="content">Some Texts</div>
+					</div>
+					<div class="card-footer">
+						<div class="price">$5.00</div>
+						<button class="card-buy">
+							Add to cart <i class="fas fa-cart-plus"></i>
+						</button>
+					</div>
+				</div>
 				<div class="card">
 					<img class="card-img" srcset="https://picsum.photos/300/300" />
 					<div class="card-body">
