@@ -17,7 +17,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 .fries {
 	height: 50px;
 	font-size: 2em;
-	background: rgb(224, 167, 11);
+	background: #455a74;
 	text-align: center;
 	line-height: 50px;
 	color: white;
@@ -35,6 +35,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 }
 /* Hide .nav-link when .nav-list is closed */
 .nav-link {
+	z-index: 4;
 	list-style-type: none;
 	opacity: 0;
 	height: 0;
@@ -50,7 +51,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	cursor: pointer;
 	height: 50px;
 	line-height: 50px;
-	background: rgb(9, 93, 248);
+	background: #7b8da6;
 }
 /* Remove background of the button and make it white; position it absolutely -40px from the top (go up by 40px) to fit in the header French Fries */
 .burger-menu {
@@ -64,20 +65,20 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 }
 /* Change color of the burger when hovered over */
 .burger-menu:hover {
-	color: #a52a2a;
+	color: #eef6f9;
 }
 /* Setting colors for different menu */
 .bun {
-	background: rgb(211, 168, 112);
+	background: #2b6b75;
 }
 .tomato {
-	background: red;
+	background: #2b6b75;
 }
 .patty {
-	background: brown;
+	background: #2b6b75;
 }
 .salad {
-	background: green;
+	background: #2b6b75;
 }
 /* Shopping cart */
 /* Position .cart-menu absolutely to .top-bar */
@@ -123,51 +124,124 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 /* Default style for items in the cart */
 .cart-item,
 .empty-item {
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 	list-style-type: none;
 	opacity: 0;
-	height: 0px;
-	background: brown;
+	height: 0;
+	background: #42a6b6;
 	transition: all 0.5s ease;
 	color: white;
-	line-height: 50px;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
 }
-.item-img {
-	height: 0;
-	grid-column: 1/2;
-	grid-row: 1/3;
-}
-.item-name {
-	height: 0;
-	grid-column: 2/5;
-	grid-row: 1/2;
-}
-.item-price {
-	height: 0;
-	grid-column: 2/4;
-	grid-row: 2/3;
-}
-.item-count {
-	height: 0;
-	width: 50px;
-	grid-column: 4/5;
-	grid-row: 2/3;
+.item-nested {
+	display: flex;
+	flex-flow: column;
+	line-height: 50px;
 }
 .item-subtotal {
+	line-height: 100px;
+}
+/* Hiding arrows in input[type=number]
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+.item-count {
+	position: relative;
+	height: 0px;
+	width: 0px;
+	display: flex;
+}
+.item-count button {
+	border: none;
+	align-items: center;
+	justify-content: center;
+	width: 0px;
+	height: 0px;
+	cursor: pointer;
+	position: relative;
+}
+/* Adding dashes */
+.item-count button:before,
+.item-count button:after {
+	position: absolute;
+	content: "";
+	width: 0px;
+	height: 0px;
+	background-color: #212121;
+	transform: translate(-50%, -50%);
+}
+/* Adding vertical dashes */
+.item-count button.plus:after {
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+.item-count .quantity {
+	font-family: sans-serif;
+	width: 0px;
+	height: 0px;
+	border: solid #ddd;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+.cart-item * {
 	height: 0;
-	grid-column: 5/6;
-	grid-row: 1/3;
+	opacity: 0;
+}
+.cart-list.open {
+	z-index: 5;
 }
 /* Styling for normal .cart-item */
 .cart-list.open .cart-item {
+	padding: 10px;
 	opacity: 1;
+	height: 120px;
+}
+.cart-list.open .item-nested {
 	height: 100px;
 }
+.cart-list.open .item-nested * {
+	height: 50px;
+}
+.cart-list.open .item-subtotal {
+	height: 100px;
+}
+.cart-list.open .item-img {
+	background-image: url("https://picsum.photos/300/300");
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	width: 80px;
+	height: 100px;
+}
+.cart-list.open .item-count {
+	height: 40px;
+	width: 100px;
+}
+.cart-list.open .item-count button {
+	width: 30px;
+	height: 30px;
+}
+/* Adding dashes */
+.cart-list.open .item-count button:before,
+.cart-list.open .item-count button:after {
+	width: 8px;
+	height: 2px;
+}
+.cart-list.open .item-count .quantity {
+	width: 50px;
+	height: 30px;
+}
 .cart-list.open .cart-item * {
-	height: 100%;
+	opacity: 1;
 }
 /* Special style for an empty .cart-list */
 .cart-list.open .empty-item {
@@ -182,7 +256,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 /* Change color of .cart-text and cart icon when hovered over */
 .cart-menu:hover > .cart-text,
 .cart-menu:hover > .fas.fa-cart-arrow-down {
-	color: #a52a2a;
+	color: #eef6f9;
 }
 /* Formatting for the main area of the website */
 main {
@@ -246,14 +320,6 @@ p {
 	width: 90px;
 	font-size: 1.5em;
 }
-/* .itemCount {
-	margin-left: 10px;
-	padding-left: 8px;
-	width: 50px;
-	height: 30px;
-	border: 1px solid;
-	border-radius: 5px;;
-} */
 /* Place buy button at bottom right of the card */
 .card-buy {
 	margin-left: 10px;
@@ -312,7 +378,7 @@ Target the screen of the device and apply the style when min-width is 500px */
 		/* Creating a triangle with border; left and right border will cut off some part of bottom border to create the triangle */
 		border-left: 20px solid transparent;
 		border-right: 20px solid transparent;
-		border-bottom: 20px solid brown;
+		border-bottom: 20px solid #42a6b6;
 		transition: all 0.5s ease;
 	}
 	/* Show the little triangle when .cart-list is open */
@@ -327,7 +393,6 @@ Target the screen of the device and apply the style when min-width is 500px */
 		width: 600px;
 	}
 	.cart-list.open .cart-item {
-		height: 100px;
 		width: 100%;
 	}
 	/* Move main downward so it doesn't get hidden behind fixed .top-bar */

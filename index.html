@@ -34,17 +34,52 @@
 					</button>
 					<ul class="cart-list">
 						<div class="cart-item" id="">
-							<img class="item-img" srcset="https://picsum.photos/100/100">
-							<div class="item-name">NAME</div>
-							<input class="item-count" type="number" value="itemCount" min="0">
-							<div class="item-price">PRICE</div>
+							<div class="item-img"></div>
+							<div class="item-nested">
+								<div class="item-name">NAME</div>
+								<div class="item-price">PRICE</div>
+							</div>
+							<div class="item-count">
+								<button
+									class="minus"
+									onclick="this.parentNode.querySelector('.quantity').stepDown()"
+								></button>
+								<input
+									class="quantity"
+									min="0"
+									name="quantity"
+									value="1"
+									type="number"
+								/>
+								<button
+									class="plus"
+									onclick="this.parentNode.querySelector('.quantity').stepUp()"
+								></button>
+							</div>
 							<div class="item-subtotal">TOTAL</div>
 						</div>
 						<div class="cart-item" id="">
-							<img class="item-img" srcset="https://picsum.photos/100/100">
-							<div class="item-name">NAME</div>
-							<input class="item-count" type="number" value="itemCount" min="0">
-							<div class="item-price">PRICE</div>
+							<div class="item-img"></div>
+							<div class="item-nested">
+								<div class="item-name">NAME</div>
+								<div class="item-price">PRICE</div>
+							</div>
+							<div class="item-count">
+								<button
+									onclick="this.parentNode.querySelector('.quantity').stepDown()"
+								></button>
+								<input
+									class="quantity"
+									min="0"
+									name="quantity"
+									value="1"
+									type="number"
+								/>
+								<button
+									onclick="this.parentNode.querySelector('.quantity').stepUp()"
+									class="plus"
+								></button>
+							</div>
 							<div class="item-subtotal">TOTAL</div>
 						</div>
 					</ul>
