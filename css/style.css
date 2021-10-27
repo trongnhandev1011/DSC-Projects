@@ -6,7 +6,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	padding: 0;
 	border: 0;
 }
-/* Make .top-bar a relative container for absolute child */
+/* Make .top-bar a relative container for absolute child, place it on top over .overlay */
 .top-bar {
 	z-index: 2;
 	position: fixed;
@@ -32,7 +32,6 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	/* Using flexbox to display the .nav-link in column */
 	display: flex;
 	flex-flow: column;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 /* Hide .nav-link when .nav-list is closed */
 .nav-link {
@@ -158,9 +157,9 @@ main {
 	top: 50px;
 	padding: 10px;
 }
-/* Adding an overlay for the .main content when a menu is opened */
+/* Adding an overlay for the main content when a menu is opened */
 .overlay {
-	z-index: 1;
+	z-index: 1; /* Putting it over all element in main */
 	position: fixed;
 	top: 50px;
 	left: 0;
@@ -238,7 +237,7 @@ Target the screen of the device and apply the style when min-width is 500px */
 		height: 40px;
 		/* Change flex-direction to row */
 		flex-flow: row;
-		justify-content: space-around;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	}
 	/* Show the .nav-link and size them to 25% of the parent's width; allow them to shrink and grow accordingly */
 	.nav-link {
@@ -258,14 +257,14 @@ Target the screen of the device and apply the style when min-width is 500px */
 	.cart-list::before {
 		content: "";
 		position: absolute;
-		top: -18px;
+		top: -16px;
 		right: 20px;
 		height: 20px;
 		width: 20px;
 		opacity: 0;
 		transform: rotateZ(45deg);
 		background: brown;
-		transition: all .5s ease;
+		transition: all .4s ease;
 	}
 	/* Show the little triangle when .cart-list is open */
 	.cart-list.open::before {
