@@ -34,8 +34,7 @@ function topDropDown() {
         document.querySelector('.overlay').style.height = '0';
         document.querySelector('.overlay').style.opacity = '0';
       }
-    }
-    )
+    })
   };
   clickDropDown(burger, burgerList, cartList);
   clickDropDown(cart, cartList, burgerList);
@@ -70,7 +69,7 @@ function loadItems(file) {
     // Get Price
     var empPrice = document.createElement('div');
     empPrice.className = "price";
-    empPrice.innerHTML = item.querySelector('Price').innerHTML;
+    empPrice.innerHTML = "$" + item.querySelector('Price').innerHTML;
     empFooter.appendChild(empPrice);
     // Create Buy Button
     var empBtn = document.createElement('button');
@@ -83,21 +82,6 @@ function loadItems(file) {
     empCard.appendChild(empFooter);
     // Add card to container
     card.appendChild(empCard);
-
-    // <div class="card">
-    // 			<img class="card-img" srcset="https://picsum.photos/300/300" />
-    // 			<div class="card-body">
-    // 				<h3>This is an item</h3>
-    // 				<div class="content">Some Texts</div>
-    // 			</div>
-    // 			<div class="card-footer">
-    // 				<div class="price">$5.00</div>
-
-    // 				<button class="card-buy">
-    // 					Add to cart <i class="fas fa-cart-plus"></i>
-    // 				</button>
-    // 			</div>
-    // </div>
   });
 }
 async function loadFile() {
@@ -110,15 +94,12 @@ async function loadFile() {
   xhttp.open("GET", "test.xml");
   xhttp.send();
 }
-
 function start() {
   loadFile();
   // Check user localStorage for previous selected item; if undefined, create a new item; else load the item
   var totalCount = localStorage.getItem('totalCount') == undefined ? localStorage.setItem('totalCount', '0') : localStorage.getItem('totalCount');
   // After the window has loaded, call these functions
+  //addEmptyList();
   topDropDown();
 }
-
-
 window.onload = start;
-

@@ -19,4 +19,23 @@
       an evil sorceress, and her own childhood to become queen
       of the world.</Description>
    </Book>
+      <Book id="bk103">
+      <Author>Garcia, A</Author>
+      <Title>Midnight Morning</Title>
+      <Genre>Fantasy</Genre>
+      <Price>15.95</Price>
+      <PublishDate>2000-12-16</PublishDate>
+      <Description>A former architect battles corporate zombies,
+      an evil sorceress, and her own childhood to become queen
+      of the world.</Description>
+   </Book>
+   <Book id="bk104">
+      <Author>Garghentini, A</Author>
+      <Title>HTML Developer's Guide</Title>
+      <Genre>Computer</Genre>
+      <Price>99.95</Price>
+      <PublishDate>2000-10-01</PublishDate>
+      <Description>An in-depth look at creating applications
+      with XML.</Description>
+   </Book>
 </Catalog>
