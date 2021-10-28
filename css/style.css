@@ -141,7 +141,7 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	line-height: 50px;
 }
 .item-subtotal {
-	line-height: 100px;
+	line-height: 0px;
 }
 /* Hiding arrows in input[type=number]
 /* Chrome, Safari, Edge, Opera */
@@ -211,7 +211,7 @@ input[type="number"] {
 .cart-list.open .item-nested * {
 	height: 50px;
 }
-.cart-list.open .item-subtotal {
+.cart-list.open {
 	height: 100px;
 }
 .cart-list.open .item-img {
@@ -399,4 +399,21 @@ Target the screen of the device and apply the style when min-width is 500px */
 	main {
 		top: 90px;
 	}
+}
+
+.cart-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  width: 100%;
+  height: 100%;
+  padding: 1.6rem;
+  border-radius: 2rem;
+  z-index: 3;
+  overflow-y: scroll;
+  background-color: white;
+  opacity: 1;
+  display: none;
+  transition: all 300ms ease-in-out;
 }
