@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Search local storage</title>
+</head>
+
+<body>
+
+This page will allow the user to search the content saved in your local storage.<br />
+Search By Author name, results will be returned by book title.<br />
+
+
+<form action="OFFLINE.html" method="get">
+  Search By Author : <input type="text" name="txtA" /><br />
+  <input type="submit" value="Submit" />
+</form> 
+<br />
+<br />
+
+
+<div id="results_ID"></div>
+
+<script type="text/javascript">
+
+var localStorageRow = localStorage.getItem(localStorage.key(i)) ;
+
+var author_query = getUrlVars()["txtA"];
+
+if (typeof(author_query) == "undefined" || author_query === "" )
+{
+}
+else
+{
+for ( var i = 0 ; i < localStorage.length;  i++)
+{
+var localStorageRow = localStorage.getItem(localStorage.key(i)) ;
+
+if (window.DOMParser)
+{
+parser=new DOMParser();
+xmlDoc=parser.parseFromString(localStorageRow,"text/xml");
+}
+else // Internet Explorer
+{
+xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+xmlDoc.async=false;
+xmlDoc.loadXML(localStorageRow);
+} 
+
+for ( var k = 0 ; k < xmlDoc.firstChild.childNodes.length ; k++ )
+{
+if ( xmlDoc.firstChild.childNodes[k].nodeName === "author" )
+{
+
+var auth_row = xmlDoc.firstChild.childNodes[k].textContent;         
+var authMatch = auth_row.match(new RegExp(author_query, "i"));
+if ( authMatch )
+{
+//CANNOT USE XPATH(a lot of browsers dont support this) 
+//YOU HAVE TO LOOP THOUGH ELEMENTS (again) TO GET TITLE
+/*
+var nodesSnapshot = document.evaluate('//title', xmlDoc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );  
+for ( var q=0 ; q < nodesSnapshot.snapshotLength; q++ )  
+{  
+document.getElementById("results_ID").innerHTML += nodesSnapshot.snapshotItem(q).textContent+"<br />";
+}  
+*/
+
+for ( var p = 0 ; p < xmlDoc.firstChild.childNodes.length ; p ++ )
+{
+if ( xmlDoc.firstChild.childNodes[p].nodeName == 'title' )
+{
+document.getElementById("results_ID").innerHTML += xmlDoc.firstChild.childNodes[p].textContent+"<br />";
+}
+}
+
+}
+}
+}
+}
+}
+
+//GET URL VARS function
+function getUrlVars() {
+var vars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+vars[key] = value;
+});
+return vars;
+}
+
+</script>
+
+</body>
+</html>

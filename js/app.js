@@ -211,13 +211,13 @@ function addToCart() {
 
   plusButton.onclick = function () {
     input.stepUp();
-    subTotal.innerHTML = input.value * Price.innerHTML;
+    subTotal.innerHTML = (input.value * Price.innerHTML).toFixed(2);
     calCount();
   };
 
   minusButton.onclick = function () {
     input.stepDown();
-    subTotal.innerHTML = input.value * Price.innerHTML;
+    subTotal.innerHTML = (input.value * Price.innerHTML).toFixed(2);
     calCount();
   };
 
@@ -230,7 +230,7 @@ function addToCart() {
   var total = document.createElement("div");
   var subTotal = document.createElement("div");
   subTotal.className = "item-subtotal";
-  subTotal.innerHTML = "TOTAL: ";
+  subTotal.innerHTML = Price.innerHTML;
   total.appendChild(subTotal);
   cartItem.appendChild(total);
 
@@ -261,3 +261,9 @@ calCount = function () {
   }
   document.getElementsByClassName('cart-item-count')[0].innerHTML = count;
 };
+
+
+
+
+
+

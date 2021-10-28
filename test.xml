@@ -2,7 +2,7 @@
 <Catalog>
    <Book id="1">
       <Author>Garghentini, Davide</Author>
-      <Title>XML Developer's Guide</Title>
+      <Title>Item 1</Title>
       <Genre>Computer</Genre>
       <Price>44.95</Price>
       <PublishDate>2000-10-01</PublishDate>
@@ -11,7 +11,7 @@
    </Book>
    <Book id="2">
       <Author>Garcia, Debra</Author>
-      <Title>Midnight Rain</Title>
+      <Title>Item 2</Title>
       <Genre>Fantasy</Genre>
       <Price>5.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -21,7 +21,7 @@
    </Book>
       <Book id="3">
       <Author>Garcia, A</Author>
-      <Title>Midnight Morning</Title>
+      <Title>Item 3</Title>
       <Genre>Fantasy</Genre>
       <Price>15.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -31,7 +31,7 @@
    </Book>
    <Book id="4">
       <Author>Garghentini, A</Author>
-      <Title>HTML Developer's Guide</Title>
+      <Title>Item 4</Title>
       <Genre>Computer</Genre>
       <Price>99.95</Price>
       <PublishDate>2000-10-01</PublishDate>
