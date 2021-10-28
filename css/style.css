@@ -5,25 +5,27 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	margin: 0;
 	padding: 0;
 	border: 0;
-}
-/* Make .top-bar a relative container for absolute child, place it on top over .overlay */
-.top-bar {
+	font-family: "Dosis", sans-serif;
+  }
+  
+  /* Make .top-bar a relative container for absolute child, place it on top over .overlay */
+  .top-bar {
 	z-index: 2;
 	position: fixed;
 	width: 100%;
 	top: 0;
 	border-top: 1px #000 solid;
-}
-.fries {
+  }
+  .fries {
 	height: 50px;
 	font-size: 2em;
-	background: #455a74;
+	background-color: #ee4d2d;
 	text-align: center;
 	line-height: 50px;
 	color: white;
-}
-/* Position .nav-list absolutely to the parent container */
-.nav-list {
+  }
+  /* Position .nav-list absolutely to the parent container */
+  .nav-list {
 	position: absolute;
 	color: #fff;
 	text-align: center;
@@ -32,29 +34,29 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	/* Using flexbox to display the .nav-link in column */
 	display: flex;
 	flex-flow: column;
-}
-/* Hide .nav-link when .nav-list is closed */
-.nav-link {
+  }
+  /* Hide .nav-link when .nav-list is closed */
+  .nav-link {
 	z-index: 4;
 	list-style-type: none;
 	opacity: 0;
 	height: 0;
 	transition: all 0.5s ease;
-}
-/* Show .nav-link when .nav-list is opened */
-.nav-list.open .nav-link {
+  }
+  /* Show .nav-link when .nav-list is opened */
+  .nav-list.open .nav-link {
 	opacity: 1;
 	height: 40px;
-}
-/* Change background when hovering over a .nav-link */
-.nav-list .nav-link:hover {
+  }
+  /* Change background when hovering over a .nav-link */
+  .nav-list .nav-link:hover {
 	cursor: pointer;
 	height: 50px;
 	line-height: 50px;
 	background: #7b8da6;
-}
-/* Remove background of the button and make it white; position it absolutely -40px from the top (go up by 40px) to fit in the header French Fries */
-.burger-menu {
+  }
+  /* Remove background of the button and make it white; position it absolutely -40px from the top (go up by 40px) to fit in the header French Fries */
+  .burger-menu {
 	position: absolute;
 	top: 1px;
 	background: transparent;
@@ -62,27 +64,27 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	width: 50px;
 	color: #fff;
 	cursor: pointer;
-}
-/* Change color of the burger when hovered over */
-.burger-menu:hover {
+  }
+  /* Change color of the burger when hovered over */
+  .burger-menu:hover {
 	color: #eef6f9;
-}
-/* Setting colors for different menu */
-.bun {
-	background: #2b6b75;
-}
-.tomato {
-	background: #2b6b75;
-}
-.patty {
-	background: #2b6b75;
-}
-.salad {
-	background: #2b6b75;
-}
-/* Shopping cart */
-/* Position .cart-menu absolutely to .top-bar */
-.cart-menu {
+  }
+  /* Setting colors for different menu */
+  .bun {
+	  background-color: black
+  }
+  .tomato {
+	  background-color: black
+  }
+  .patty {
+	  background-color: black
+  }
+  .salad {
+	  background-color: black
+  }
+  /* Shopping cart */
+  /* Position .cart-menu absolutely to .top-bar */
+  .cart-menu {
 	position: absolute;
 	top: 16px;
 	right: 0px;
@@ -91,9 +93,9 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	color: white;
 	/* Remove background of the button */
 	background: none;
-}
-/* Position .cart-item-count right above cart */
-.cart-item-count {
+  }
+  /* Position .cart-item-count right above cart */
+  .cart-item-count {
 	font-size: 0.8em;
 	position: absolute;
 	width: 20px;
@@ -104,13 +106,13 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	background-color: #a52a2a;
 	text-align: center;
 	line-height: 18px;
-}
-/* Hide .cart-text for smaller device */
-.cart-text {
+  }
+  /* Hide .cart-text for smaller device */
+  .cart-text {
 	display: none;
-}
-/* Position .cart-list right under .top-bar */
-.cart-list {
+  }
+  /* Position .cart-list right under .top-bar */
+  .cart-list {
 	position: absolute;
 	top: 50px;
 	right: 0;
@@ -120,47 +122,63 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
 	flex-flow: column;
 	text-align: center;
 	color: #000;
-}
-/* Default style for items in the cart */
-.cart-item,
-.empty-item {
-	margin-bottom: 12px;
+  }
+  /* Default style for items in the cart */
+  .cart-item,
+  .empty-item {
 	list-style-type: none;
-	opacity: 0;
-	height: 0;
 	background: #42a6b6;
+	height: 0;
+	opacity: 0;
 	transition: all 0.5s ease;
 	color: white;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.item-nested {
-	display: flex;
+  }
+  .cart-item {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: minmax(50px, 100px);
+  }
+  .item-img {
+	grid-column: 1/2;
+	grid-row: 1/3;
+  }
+  .item-name {
+	grid-column: 2/5;
+	grid-row: 1/2;
 	flex-flow: column;
 	line-height: 50px;
-}
-.item-subtotal {
-	line-height: 0px;
-}
-/* Hiding arrows in input[type=number]
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+  }
+  .item-price {
+	grid-column: 2/3;
+	grid-row: 2/3;
+	line-height: 50px;
+  }
+  .item-subtotal {
+	grid-column: 4/5;
+	grid-row: 2/3;
+	line-height: 50px;
+  }
+  /* Hiding arrows in input[type=number]
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
-}
-/* Firefox */
-input[type="number"] {
+  }
+  /* Firefox */
+  input[type="number"] {
 	-moz-appearance: textfield;
-}
-.item-count {
+  }
+  .item-count {
 	position: relative;
 	height: 0px;
 	width: 0px;
 	display: flex;
-}
-.item-count button {
+	grid-column: 3/4;
+	grid-row: 2/3;
+	align-self: center;
+  }
+  .item-count button {
 	border: none;
 	align-items: center;
 	justify-content: center;
@@ -168,22 +186,22 @@ input[type="number"] {
 	height: 0px;
 	cursor: pointer;
 	position: relative;
-}
-/* Adding dashes */
-.item-count button:before,
-.item-count button:after {
+  }
+  /* Adding dashes */
+  .item-count button:before,
+  .item-count button:after {
 	position: absolute;
 	content: "";
 	width: 0px;
 	height: 0px;
 	background-color: #212121;
 	transform: translate(-50%, -50%);
-}
-/* Adding vertical dashes */
-.item-count button.plus:after {
+  }
+  /* Adding vertical dashes */
+  .item-count button.plus:after {
 	transform: translate(-50%, -50%) rotate(90deg);
-}
-.item-count .quantity {
+  }
+  .item-count .quantity {
 	font-family: sans-serif;
 	width: 0px;
 	height: 0px;
@@ -191,81 +209,76 @@ input[type="number"] {
 	font-size: 1.5rem;
 	font-weight: bold;
 	text-align: center;
-}
-.cart-item * {
+  }
+  .cart-item * {
 	height: 0;
 	opacity: 0;
-}
-.cart-list.open {
+  }
+  .cart-list.open {
 	z-index: 5;
-}
-/* Styling for normal .cart-item */
-.cart-list.open .cart-item {
+  }
+  /* Styling for normal .cart-item */
+  .cart-list.open .cart-item {
+	margin-bottom: 12px;
 	padding: 10px;
 	opacity: 1;
 	height: 120px;
-}
-.cart-list.open .item-nested {
-	height: 100px;
-}
-.cart-list.open .item-nested * {
-	height: 50px;
-}
-.cart-list.open {
-	height: 100px;
-}
-.cart-list.open .item-img {
-	background-image: url("https://picsum.photos/300/300");
+  }
+  .cart-list.open .item-img {
 	background-repeat: no-repeat;
 	background-size: cover;
-	overflow: hidden;
 	width: 80px;
 	height: 100px;
-}
-.cart-list.open .item-count {
-	height: 40px;
+  }
+  .cart-list.open .item-subtotal,
+  .cart-list.open .item-name,
+  .cart-list.open .item-price {
+	height: 50px;
+  }
+  .cart-list.open .item-count {
+	height: 30px;
 	width: 100px;
-}
-.cart-list.open .item-count button {
+  }
+  .cart-list.open .item-count button {
 	width: 30px;
 	height: 30px;
-}
-/* Adding dashes */
-.cart-list.open .item-count button:before,
-.cart-list.open .item-count button:after {
+  }
+  /* Adding dashes */
+  .cart-list.open .item-count button:before,
+  .cart-list.open .item-count button:after {
 	width: 8px;
 	height: 2px;
-}
-.cart-list.open .item-count .quantity {
+  }
+  .cart-list.open .item-count .quantity {
 	width: 50px;
 	height: 30px;
-}
-.cart-list.open .cart-item * {
+  }
+  .cart-list.open .cart-item * {
 	opacity: 1;
-}
-/* Special style for an empty .cart-list */
-.cart-list.open .empty-item {
+  }
+  /* Special style for an empty .cart-list */
+  .cart-list.open .empty-item {
 	opacity: 1;
 	height: 100px;
 	line-height: 100px;
-}
-/* Change cursor when hover over the menu */
-.cart-menu:hover {
+  }
+  /* Change cursor when hover over the menu */
+  .cart-menu:hover {
 	cursor: pointer;
-}
-/* Change color of .cart-text and cart icon when hovered over */
-.cart-menu:hover > .cart-text,
-.cart-menu:hover > .fas.fa-cart-arrow-down {
+  }
+  /* Change color of .cart-text and cart icon when hovered over */
+  .cart-menu:hover > .cart-text,
+  .cart-menu:hover > .fas.fa-cart-arrow-down {
 	color: #eef6f9;
-}
-/* Formatting for the main area of the website */
-main {
+  }
+  /* Formatting for the main area of the website */
+  main {
 	position: relative;
 	top: 50px;
 	padding: 10px;
-}
-/* Adding an overlay for the main content when a menu is opened */
-.overlay {
+  }
+  /* Adding an overlay for the main content when a menu is opened */
+  .overlay {
 	z-index: 1; /* Putting it over all element in main */
 	position: fixed;
 	top: 50px;
@@ -275,38 +288,40 @@ main {
 	opacity: 0;
 	background: rgba(0, 0, 0);
 	transition: opacity 0.5s ease;
-}
-/* Gap between p and center them */
-p {
+  }
+  /* Gap between p and center them */
+  p {
 	margin: 10px auto;
-}
-/* Card formatting */
-/* Using flex-box to display cards in rows with auto wrapping */
-.card-container {
-	margin: 10px auto;
+  }
+  /* Card formatting */
+  /* Using flex-box to display cards in rows with auto wrapping */
+  .card-container {
+	margin: 50px auto;
 	width: 100%;
 	display: flex;
 	flex-flow: wrap;
 	justify-content: center;
-}
-/* Set card position to relative for absolute child */
-.card {
+  }
+  /* Set card position to relative for absolute child */
+  .card {
 	position: relative;
 	margin: 12px;
 	width: 300px;
 	height: 400px;
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 	transition: all 0.5s ease;
-}
-/* Responsive image */
-.card-img {
-	width: 100%;
-	height: auto;
-}
-.card-body {
+  }
+  /* Responsive image */
+  .card-img {
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 300px;
+	height: 300px;
+  }
+  .card-body {
 	padding: 5px 10px;
-}
-.card-footer {
+  }
+  .card-footer {
 	position: absolute;
 	bottom: 10px;
 	width: 100%;
@@ -314,106 +329,115 @@ p {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-/* Place price at bottom left of the card */
-.price {
+  }
+  /* Place price at bottom left of the card */
+  .price {
 	width: 90px;
 	font-size: 1.5em;
-}
-/* Place buy button at bottom right of the card */
-.card-buy {
+  }
+  /* Place buy button at bottom right of the card */
+  .card-buy {
 	margin-left: 10px;
 	width: 120px;
 	height: 30px;
 	background: orange;
 	border-radius: 10px;
-}
-/* Add expanding effect when hovered */
-.card:hover {
+  }
+  /* Add expanding effect when hovered */
+  .card:hover {
 	transform: scale(1.07, 1.07);
-}
-.card-buy:hover {
+  }
+  .card-buy:hover {
 	color: white;
 	background: lightcoral;
-}
-/* Desktop after mobile
-Target the screen of the device and apply the style when min-width is 500px */
-@media only screen and (min-width: 500px) {
+  }
+  .in-cart {
+	pointer-events: none; /* Disable every event */
+	background: #212121;
+	color: white;
+  }
+  /* Desktop after mobile
+  Target the screen of the device and apply the style when min-width is 500px */
+  @media only screen and (min-width: 500px) {
 	/* Hide the burger button */
 	.burger-menu {
-		display: none;
+	  display: none;
 	}
 	/* Position .nav-list so it takes takes up space below French Fries */
 	.nav-list,
 	.nav-list.open {
-		position: initial;
-		height: 40px;
-		/* Change flex-direction to row */
-		flex-flow: row;
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+	  position: initial;
+	  height: 40px;
+	  /* Change flex-direction to row */
+	  flex-flow: row;
+	  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	}
 	/* Show the .nav-link and size them to 25% of the parent's width; allow them to shrink and grow accordingly */
 	.nav-link {
-		opacity: 1;
-		height: 40px;
-		flex: 20%;
-		line-height: 40px;
+	  opacity: 1;
+	  height: 40px;
+	  flex: 20%;
+	  line-height: 40px;
 	}
 	.cart-menu {
-		width: 85px;
+	  width: 85px;
 	}
 	.cart-text {
-		display: initial;
-		margin-left: 12px;
+	  display: initial;
+	  margin-left: 12px;
 	}
-	/* Add a little triangle on top of the list */
-	.cart-list::before {
-		content: "";
-		position: absolute;
-		right: 20px;
-		opacity: 0;
-		top: -20px;
-		width: 0;
-		height: 0px;
-		/* Creating a triangle with border; left and right border will cut off some part of bottom border to create the triangle */
-		border-left: 20px solid transparent;
-		border-right: 20px solid transparent;
-		border-bottom: 20px solid #42a6b6;
-		transition: all 0.5s ease;
-	}
-	/* Show the little triangle when .cart-list is open */
-	.cart-list.open::before {
-		opacity: 1;
-	}
+	/* Add a little triangle on top of the list
+	  .cart-list::before {
+		  content: "";
+		  position: absolute;
+		  right: 20px;
+		  opacity: 0;
+		  top: -20px;
+		  width: 0;
+		  height: 0px;
+		  Creating a triangle with border; left and right border will cut off some part of bottom border to create the triangle
+		  border-left: 20px solid transparent;
+		  border-right: 20px solid transparent;
+		  border-bottom: 20px solid #42a6b6;
+		  transition: all 0.5s ease;
+	  }
+	   Show the little triangle when .cart-list is open
+	  .cart-list.open::before {
+		  opacity: 1;
+	  } 
+	  */
 	/* Reposition the list to the right of screen */
 	.cart-list {
-		position: absolute;
-		top: 60px;
-		right: 10px;
-		width: 600px;
+	  position: relative;
+	  margin: 0 auto;
+	  width: 1000px;
+	  background: #455a74;
 	}
-	.cart-list.open .cart-item {
-		width: 100%;
+	.cart-list.open {
+	  height: 100%;
+	  padding: 10px;
+	  border-radius: 5px;
+	}
+	.cart-list.open .cart-item,
+	.cart-list.open .empty-item {
+	  margin: 12px 0;
+	  border-radius: 5px;
 	}
 	/* Move main downward so it doesn't get hidden behind fixed .top-bar */
 	main {
-		top: 90px;
+	  top: 90px;
 	}
-}
-
-.cart-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  width: 100%;
-  height: 100%;
-  padding: 1.6rem;
-  border-radius: 2rem;
-  z-index: 3;
-  overflow-y: scroll;
-  background-color: white;
-  opacity: 1;
-  display: none;
-  transition: all 300ms ease-in-out;
-}
+  }
+  
+  .dollar {
+	font-size: 20px;
+  }
+  
+  .total-container {
+	display: none;
+	color: white;
+  }
+  
+  #header {
+	  margin-top: 30px;
+  }

@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
 <Catalog>
-   <Book id="1">
+   <Book id="bk101">
       <Author>Garghentini, Davide</Author>
-      <Title>Item 1</Title>
+      <Title>XML Developer's Guide</Title>
+      <ImageURI>fox.png</ImageURI>
       <Genre>Computer</Genre>
       <Price>44.95</Price>
       <PublishDate>2000-10-01</PublishDate>
       <Description>An in-depth look at creating applications
       with XML.</Description>
    </Book>
-   <Book id="2">
+   <Book id="bk102">
       <Author>Garcia, Debra</Author>
-      <Title>Item 2</Title>
+      <Title>Midnight Rain</Title>
+      <ImageURI>astro.png</ImageURI>
       <Genre>Fantasy</Genre>
       <Price>5.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -19,9 +21,10 @@
       an evil sorceress, and her own childhood to become queen
       of the world.</Description>
    </Book>
-      <Book id="3">
-      <Author>Garcia, A</Author>
-      <Title>Item 3</Title>
+      <Book id="bk103">
+      <Author>Marcus, A</Author>
+      <Title>Midnight Person</Title>
+      <ImageURI>person.png</ImageURI>
       <Genre>Fantasy</Genre>
       <Price>15.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -29,9 +32,10 @@
       an evil sorceress, and her own childhood to become queen
       of the world.</Description>
    </Book>
-   <Book id="4">
-      <Author>Garghentini, A</Author>
-      <Title>Item 4</Title>
+   <Book id="bk104">
+      <Author>Alpha, A</Author>
+      <Title>HTML Cat's Guide</Title>
+      <ImageURI>cat.png</ImageURI>
       <Genre>Computer</Genre>
       <Price>99.95</Price>
       <PublishDate>2000-10-01</PublishDate>

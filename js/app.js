@@ -5,15 +5,36 @@ const cart = document.querySelector(".cart-menu");
 const cartList = document.querySelector(".cart-list");
 const buy = document.querySelectorAll(".card-buy");
 const card = document.querySelector(".card-container");
+var cartCount;
+const cartContainer = document.querySelector(".cart");
 // If 0 item was loaded for the current user, add an placeholder <li> saying "Add something to your cart"
-function addEmptyList() {
+function addEmpty() {
   var emptyText = document.createTextNode("Add something to your cart");
   var emptyList = document.createElement("li");
   emptyList.className = "empty-item";
   emptyList.appendChild(emptyText);
   cartList.appendChild(emptyList);
 }
+function removeEmpty(current) {
+  current.classList.add("in-cart");
+  current.innerHTML = "In cart";
+  document.querySelector(".cart-item-count").innerHTML = cartCount;
+}
+function checkEmpty() {
+  if (cartCount == 0) {
+    addEmpty();
+  }
+}
 
+var i = 0;
+function setStorage(id, count, cartCount) {
+  document.querySelector(".cart-item-count").innerHTML = cartCount;
+  localStorage.setItem("totalCount", cartCount);
+  localStorage.setItem(id, count);
+}
+function loadStorage(id) {
+  return +localStorage.getItem(id);
+}
 function topDropDown() {
   function clickDropDown(parent, list, otherList) {
     // Add a click event to the parent element; if clicked, call function()
@@ -33,22 +54,32 @@ function topDropDown() {
         document.querySelector(".overlay").style.height = "0";
         document.querySelector(".overlay").style.opacity = "0";
       }
+
+      if (i % 2 == 1) totalContainer.style.display = "none";
+      else totalContainer.style.display = "block";
+      i++;
     });
   }
+
   clickDropDown(burger, burgerList, cartList);
   clickDropDown(cart, cartList, burgerList);
+}
+function createContainer(className, id) {
+  var container = document.createElement("div");
+  container.className = className;
+  container.id = id;
+  return container;
 }
 function loadItems(file) {
   var items = file.querySelectorAll("Book");
   items.forEach(function (item) {
     // Create Card
-    var empCard = document.createElement("div");
-    empCard.className = "card";
-    empCard.id = item.id;
+    var empCard = createContainer("card", item.id);
     // Create Image
-    var empImg = document.createElement("img");
+    var empImg = document.createElement("div");
     empImg.className = "card-img";
-    empImg.setAttribute("srcset", "https://picsum.photos/300/300");
+    empImg.style.backgroundImage =
+      "url('../img/" + item.querySelector("ImageURI").innerHTML + "')";
     empCard.appendChild(empImg);
     // Create Card Body
     var empBody = document.createElement("div");
@@ -66,10 +97,16 @@ function loadItems(file) {
     var empFooter = document.createElement("div");
     empFooter.className = "card-footer";
     // Get Price
-    var empPrice = document.createElement("div");
+    var priceContainer = document.createElement("div");
+    var dollarIcon = document.createElement("span");
+    var empPrice = document.createElement("span");
     empPrice.className = "price";
+    dollarIcon.innerHTML = "$";
+    dollarIcon.className = "dollar";
     empPrice.innerHTML = item.querySelector("Price").innerHTML;
-    empFooter.appendChild(empPrice);
+    priceContainer.appendChild(dollarIcon);
+    priceContainer.appendChild(empPrice);
+    empFooter.appendChild(priceContainer);
     // Create Buy Button
     var empBtn = document.createElement("button");
     empBtn.className = "card-buy";
@@ -77,19 +114,130 @@ function loadItems(file) {
     var empIcon = document.createElement("i");
     empIcon.className = "fas fa-cart-plus";
     empBtn.appendChild(empIcon);
+    empBtn.addEventListener("click", addToCart);
+    empBtn.addEventListener("click", Total);
+    
     empFooter.appendChild(empBtn);
     empCard.appendChild(empFooter);
     // Add card to container
     card.appendChild(empCard);
+    // Load LocalStorage; if some items are loaded, invoke addToCart()
+    if (loadStorage(item.id) > 0) {
+      empBtn.click();
+    }
   });
-  addingButtons = [...document.querySelectorAll(".card-buy")];
-
-  for (let i = 0; i < addingButtons.length; i++) {
-    addingButtons[i].addEventListener("click", addToCart);
-  }
 }
 
-var addingButtons;
+function addToCart() {
+  if (cartCount == 0 && document.querySelector(".empty-item")) {
+    document.querySelector(".empty-item").remove();
+  }
+  // Set the item to be in cart and lock the add to cart button
+  var buyBtn = this;
+  removeEmpty(buyBtn);
+  const card = buyBtn.parentNode.parentNode;
+  // Create Item
+  var cartItem = createContainer("cart-item", card.id);
+  // Input for quantity
+  var input = document.createElement("input");
+  input.className = "quantity";
+  input.type = "number";
+  input.min = 0;
+  input.name = "quantity";
+  if (loadStorage(card.id) > 0) {
+    // If loadStorage has a value larger > 0; load the value
+    input.value = loadStorage(card.id);
+  } else {
+    // Set the counter to 1 and increase the cart by 1. update storage accordingly
+    input.value = 1;
+    cartCount++;
+    setStorage(card.id, input.value, cartCount);
+  }
+  // Add the number of item
+  // Image
+  var cartImg = document.createElement("div");
+  cartImg.className = "item-img";
+  cartImg.style.backgroundImage =
+    card.querySelector(".card-img").style.backgroundImage;
+  cartItem.appendChild(cartImg);
+  // Name & Price
+  var itemName = document.createElement("h3");
+  itemName.className = "item-name";
+  itemName.innerHTML = card.querySelector("h3").innerHTML;
+  var itemPrice = document.createElement("span");
+  var itemPrice = document.createElement("span");
+  itemPrice.className = "item-price";
+  itemPrice.innerHTML = card.querySelector(".price").innerHTML;
+  cartItem.appendChild(itemName);
+  cartItem.appendChild(itemPrice);
+  // Minus and Plus button
+  var itemCount = document.createElement("div");
+  itemCount.className = "item-count";
+  var minusButton = document.createElement("button");
+  minusButton.className = "minus";
+  minusButton.addEventListener("click", function () {
+    // Decrease the counter by 1
+    this.parentNode.querySelector(".quantity").stepDown();
+    subTotal.innerHTML = (input.value * itemPrice.innerHTML).toFixed(2);
+    Total();
+    // If cartCount is 0, stop reducing
+    cartCount = cartCount ? --cartCount : 0;
+    // Update the local storage
+    setStorage(card.id, input.value, cartCount);
+    // If the item has 0 item, remove it from the cart; add empty if necessary
+    if (input.value == 0) {
+      buyBtn.classList.remove("in-cart");
+      buyBtn.innerHTML = 'Add to cart <i class="fas fa-cart-plus"></i>';
+      cartList.removeChild(cartItem);
+      checkEmpty();
+    }
+  });
+
+  var plusButton = document.createElement("button");
+  plusButton.className = "plus";
+  plusButton.addEventListener("click", function () {
+    // Increase the counter by 1
+    this.parentNode.querySelector(".quantity").stepUp();
+    cartCount++;
+    subTotal.innerHTML = (input.value * itemPrice.innerHTML).toFixed(2);
+    Total();
+    // Update the local storage
+    setStorage(card.id, input.value, cartCount);
+  });
+  itemCount.appendChild(minusButton);
+  itemCount.appendChild(input);
+  itemCount.appendChild(plusButton);
+  cartItem.appendChild(itemCount);
+  //
+  var total = document.createElement("div");
+  var subTotal = document.createElement("div");
+  subTotal.className = "item-subtotal";
+  subTotal.innerHTML = itemPrice.innerHTML;
+  total.appendChild(subTotal);
+  cartItem.appendChild(total);
+  cartList.appendChild(cartItem);
+}
+
+var totalContainer = document.createElement("div");
+totalContainer.className = "total-container";
+var totalText = document.createElement("span");
+var totalPrice = document.createElement("span");
+totalText.innerHTML = "TOTAL: ";
+
+Total = function () {
+  var subTotalList = document.getElementsByClassName("item-subtotal");
+  var Total = 0;
+  for (let i = 0; i < subTotalList.length; i++) {
+    Total += Number(subTotalList[i].innerHTML);
+  }
+  totalPrice.innerHTML = Total.toFixed(2);
+};
+
+// totalPrice.innerHTML =
+totalContainer.appendChild(totalText);
+totalContainer.appendChild(totalPrice);
+cartList.appendChild(totalContainer);
+
 async function loadFile() {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -101,169 +249,17 @@ async function loadFile() {
   xhttp.send();
 }
 function start() {
-  loadFile();
   // Check user localStorage for previous selected item; if undefined, create a new item; else load the item
-  var totalCount =
-    localStorage.getItem("totalCount") == undefined
-      ? localStorage.setItem("totalCount", "0")
-      : localStorage.getItem("totalCount");
+  if (localStorage.getItem("totalCount") == undefined) {
+    cartCount = 0;
+    localStorage.setItem("totalCount", "0");
+  } else {
+    cartCount = +localStorage.getItem("totalCount");
+  }
+  checkEmpty();
+  loadFile();
+  document.querySelector(".cart-item-count").innerHTML = cartCount;
   // After the window has loaded, call these functions
-  //addEmptyList();
   topDropDown();
 }
 window.onload = start;
-
-cartContainer = document.querySelector(".cart-container");
-
-var i = 0;
-function changeCartContainer() {
-  if (i % 2 == 1) cartContainer.style.display = "none";
-  else cartContainer.style.display = "block";
-  i++;
-}
-
-/* <div class="cart-item" id="">
-                <div class="item-img"></div>
-                <div class="item-nested">
-                  <div class="item-name">NAME</div>
-                  <div class="item-price">PRICE</div>
-                </div>
-                <div class="item-count">
-                  <button
-                    class="minus"
-                    onclick="this.parentNode.querySelector('.quantity').stepDown()"
-                  ></button>
-                  <input
-                    class="quantity"
-                    min="0"
-                    name="quantity"
-                    value="1"
-                    type="number"
-                  />
-                  <button
-                    class="plus"
-                    onclick="this.parentNode.querySelector('.quantity').stepUp()"
-                  ></button>
-                </div>
-                <div class="item-subtotal">TOTAL</div>
-              </div> */
-
-function addToCart() {
-  list = document.getElementsByClassName("cart-item");
-  var itemList = [];
-  for (let j = 0; j < list.length; j++) {
-    itemList.push(list[j].id);
-  }
-
-  // Create Item
-  var cartItem = document.createElement("div");
-  cartItem.className = "cart-item";
-  cartItem.id = this.parentNode.parentNode.id;
-
-  // Image
-  var cartImg = document.createElement("div");
-  cartImg.className = "item-img";
-  cartItem.appendChild(cartImg);
-
-  // Name & Price
-  var itemNested = document.createElement("div");
-  itemNested.className = "item-nested";
-  var itemName = document.createElement("span");
-  var Name = document.createElement("span");
-  var Price = document.createElement("span");
-  var nameContainer = document.createElement("div");
-  var priceContainer = document.createElement("div");
-
-  itemName.className = "item-name";
-  itemName.innerHTML = "NAME: ";
-  var itemPrice = document.createElement("span");
-  itemPrice.className = "item-price";
-  itemPrice.innerHTML = "PRICE: ";
-
-  Price.innerHTML =
-    this.parentNode.getElementsByClassName("price")[0].innerHTML;
-
-  Name.innerHTML =
-    this.parentNode.parentNode.getElementsByTagName("h3")[0].innerHTML;
-
-  nameContainer.appendChild(itemName);
-  nameContainer.appendChild(Name);
-  priceContainer.appendChild(itemPrice);
-  priceContainer.appendChild(Price);
-  itemNested.appendChild(nameContainer);
-  itemNested.appendChild(priceContainer);
-  cartItem.appendChild(itemNested);
-
-  // Quantity
-  var itemCount = document.createElement("div");
-  itemCount.className = "item-count";
-  var minusButton = document.createElement("button");
-  minusButton.className = "minus";
-
-  var input = document.createElement("input");
-  input.className = "quantity";
-  input.min = 1;
-  input.name = "quantity";
-  input.value = 1;
-  input.type = "number";
-  var plusButton = document.createElement("button");
-  plusButton.className = "plus";
-
-  plusButton.onclick = function () {
-    input.stepUp();
-    subTotal.innerHTML = (input.value * Price.innerHTML).toFixed(2);
-    calCount();
-  };
-
-  minusButton.onclick = function () {
-    input.stepDown();
-    subTotal.innerHTML = (input.value * Price.innerHTML).toFixed(2);
-    calCount();
-  };
-
-  itemCount.appendChild(minusButton);
-  itemCount.appendChild(input);
-  itemCount.appendChild(plusButton);
-  cartItem.appendChild(itemCount);
-
-  //TOTAL
-  var total = document.createElement("div");
-  var subTotal = document.createElement("div");
-  subTotal.className = "item-subtotal";
-  subTotal.innerHTML = Price.innerHTML;
-  total.appendChild(subTotal);
-  cartItem.appendChild(total);
-
-  //Delete
-  var bin = document.createElement("i");
-  bin.className = "fas fa-trash";
-  var BinIcon = document.createElement("button");
-  BinIcon.className = "delete-button";
-  BinIcon.appendChild(bin);
-  cartItem.appendChild(BinIcon);
-
-  cartContainer.appendChild(cartItem);
-
-  BinIcon.onclick = function () {
-    cartContainer.removeChild(cartItem);
-    calCount();
-  };
-
-  calCount();
-}
-
-var count;
-calCount = function () {
-  count = 0;
-  inputs = document.getElementsByClassName("quantity");
-  for (let i = 0; i < inputs.length; i++) {
-    count += Number(inputs[i].value);
-  }
-  document.getElementsByClassName('cart-item-count')[0].innerHTML = count;
-};
-
-
-
-
-
-
