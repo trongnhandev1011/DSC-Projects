@@ -68,7 +68,7 @@ function loadItems(file) {
     // Get Price
     var empPrice = document.createElement("div");
     empPrice.className = "price";
-    empPrice.innerHTML = "$" + item.querySelector("Price").innerHTML;
+    empPrice.innerHTML = item.querySelector("Price").innerHTML;
     empFooter.appendChild(empPrice);
     // Create Buy Button
     var empBtn = document.createElement("button");
@@ -83,7 +83,7 @@ function loadItems(file) {
     card.appendChild(empCard);
   });
   addingButtons = [...document.querySelectorAll(".card-buy")];
-  console.log(addingButtons);
+
   for (let i = 0; i < addingButtons.length; i++) {
     addingButtons[i].addEventListener("click", addToCart);
   }
@@ -147,10 +147,18 @@ function changeCartContainer() {
                 </div>
                 <div class="item-subtotal">TOTAL</div>
               </div> */
+
 function addToCart() {
+  list = document.getElementsByClassName("cart-item");
+  var itemList = [];
+  for (let j = 0; j < list.length; j++) {
+    itemList.push(list[j].id);
+  }
+
   // Create Item
   var cartItem = document.createElement("div");
   cartItem.className = "cart-item";
+  cartItem.id = this.parentNode.parentNode.id;
 
   // Image
   var cartImg = document.createElement("div");
@@ -160,15 +168,30 @@ function addToCart() {
   // Name & Price
   var itemNested = document.createElement("div");
   itemNested.className = "item-nested";
-  var itemName = document.createElement("div");
-  itemName.className = "item-name";
-  itemName.innerHTML = "NAME";
-  var itemPrice = document.createElement("div");
-  itemPrice.className = "item-price";
-  itemPrice.innerHTML = "PRICE";
+  var itemName = document.createElement("span");
+  var Name = document.createElement("span");
+  var Price = document.createElement("span");
+  var nameContainer = document.createElement("div");
+  var priceContainer = document.createElement("div");
 
-  itemNested.appendChild(itemName);
-  itemNested.appendChild(itemPrice);
+  itemName.className = "item-name";
+  itemName.innerHTML = "NAME: ";
+  var itemPrice = document.createElement("span");
+  itemPrice.className = "item-price";
+  itemPrice.innerHTML = "PRICE: ";
+
+  Price.innerHTML =
+    this.parentNode.getElementsByClassName("price")[0].innerHTML;
+
+  Name.innerHTML =
+    this.parentNode.parentNode.getElementsByTagName("h3")[0].innerHTML;
+
+  nameContainer.appendChild(itemName);
+  nameContainer.appendChild(Name);
+  priceContainer.appendChild(itemPrice);
+  priceContainer.appendChild(Price);
+  itemNested.appendChild(nameContainer);
+  itemNested.appendChild(priceContainer);
   cartItem.appendChild(itemNested);
 
   // Quantity
@@ -176,62 +199,65 @@ function addToCart() {
   itemCount.className = "item-count";
   var minusButton = document.createElement("button");
   minusButton.className = "minus";
-  minusButton.onclick = "this.parentNode.querySelector('.quantity').stepDown()";
+
   var input = document.createElement("input");
   input.className = "quantity";
-  input.min = 0;
+  input.min = 1;
   input.name = "quantity";
   input.value = 1;
   input.type = "number";
   var plusButton = document.createElement("button");
   plusButton.className = "plus";
-  plusButton.onclick = "this.parentNode.querySelector('.quantity').stepUp()";
+
+  plusButton.onclick = function () {
+    input.stepUp();
+    subTotal.innerHTML = input.value * Price.innerHTML;
+    calCount();
+  };
+
+  minusButton.onclick = function () {
+    input.stepDown();
+    subTotal.innerHTML = input.value * Price.innerHTML;
+    calCount();
+  };
 
   itemCount.appendChild(minusButton);
   itemCount.appendChild(input);
   itemCount.appendChild(plusButton);
   cartItem.appendChild(itemCount);
 
-  //
+  //TOTAL
   var total = document.createElement("div");
   var subTotal = document.createElement("div");
   subTotal.className = "item-subtotal";
-  subTotal.innerHTML = "TOTAL";
+  subTotal.innerHTML = "TOTAL: ";
   total.appendChild(subTotal);
   cartItem.appendChild(total);
 
+  //Delete
+  var bin = document.createElement("i");
+  bin.className = "fas fa-trash";
+  var BinIcon = document.createElement("button");
+  BinIcon.className = "delete-button";
+  BinIcon.appendChild(bin);
+  cartItem.appendChild(BinIcon);
+
   cartContainer.appendChild(cartItem);
 
-  count = 0;
+  BinIcon.onclick = function () {
+    cartContainer.removeChild(cartItem);
+    calCount();
+  };
 
-  plusButtons = document.querySelectorAll(".plus");
-  console.log(plusButtons);
-
-  minusButtons = document.querySelectorAll(".minus");
-  console.log(minusButtons);
-
-  function clickPlus(node) {
-    countNumber.innerHTML = ++count;
-    // console.log(count)
-    node.parentNode.querySelector(".quantity").stepUp();
-    // console.log(count)
-  }
-
-  function clickMinus(node) {
-    countNumber.innerHTML = --count;
-    node.parentNode.querySelector(".quantity").stepDown();
-  }
-
-  for (let i = 0; i < plusButtons.length; i++) {
-    plusButtons[i].addEventListener("click", clickPlus);
-  }
-
-  for (let i = 0; i < minusButtons.length; i++) {
-    minusButtons[i].addEventListener("click", clickMinus);
-  }
+  calCount();
 }
 
-items = document.querySelectorAll(".cart-item");
-
-countNumber = document.querySelector(".cart-item-count");
-countNumber.innerHTML = 0;
+var count;
+calCount = function () {
+  count = 0;
+  inputs = document.getElementsByClassName("quantity");
+  for (let i = 0; i < inputs.length; i++) {
+    count += Number(inputs[i].value);
+  }
+  document.getElementsByClassName('cart-item-count')[0].innerHTML = count;
+};
