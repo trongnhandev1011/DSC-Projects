@@ -3,6 +3,7 @@
    <Book id="bk101">
       <Author>Garghentini, Davide</Author>
       <Title>XML Developer's Guide</Title>
+      <ImageURI>fox.png</ImageURI>
       <Genre>Computer</Genre>
       <Price>44.95</Price>
       <PublishDate>2000-10-01</PublishDate>
@@ -12,6 +13,7 @@
    <Book id="bk102">
       <Author>Garcia, Debra</Author>
       <Title>Midnight Rain</Title>
+      <ImageURI>astro.png</ImageURI>
       <Genre>Fantasy</Genre>
       <Price>5.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -20,8 +22,9 @@
       of the world.</Description>
    </Book>
       <Book id="bk103">
-      <Author>Garcia, A</Author>
-      <Title>Midnight Morning</Title>
+      <Author>Marcus, A</Author>
+      <Title>Midnight Person</Title>
+      <ImageURI>person.png</ImageURI>
       <Genre>Fantasy</Genre>
       <Price>15.95</Price>
       <PublishDate>2000-12-16</PublishDate>
@@ -30,8 +33,9 @@
       of the world.</Description>
    </Book>
    <Book id="bk104">
-      <Author>Garghentini, A</Author>
-      <Title>HTML Developer's Guide</Title>
+      <Author>Alpha, A</Author>
+      <Title>HTML Cat's Guide</Title>
+      <ImageURI>cat.png</ImageURI>
       <Genre>Computer</Genre>
       <Price>99.95</Price>
       <PublishDate>2000-10-01</PublishDate>
