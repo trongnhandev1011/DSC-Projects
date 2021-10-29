@@ -118,13 +118,6 @@ function sortCard() {
       }
       break;
     default:
-      for (i = 0; i < nameList.length; i++) {
-        for (j = i + 1; j < nameList.length; j++) {
-          if (+cardList[j].id.substr(2) < +cardList[i].id.substr(2)) {
-            card.insertBefore(cardList[j], cardList[i]);
-          }
-        }
-      }
   }
 }
 function loadItems(file) {
