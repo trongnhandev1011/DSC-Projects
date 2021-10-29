@@ -282,6 +282,7 @@ function sortCard() {
           }
         }
       }
+
       break;
     default:
   }

@@ -2,6 +2,27 @@ main {
 	background-color: #ee4d2d;
 }
 
+.card-body {
+	color: white
+}
+
+.card {
+	background-color: black;
+}
+
+.dollar{
+	color: white;
+}
+
+.price {
+	color: white;
+}
+
+.card-sort {
+	margin: 0 0 0 5vw;
+}
+
+
 /* .card-container {
 	background-color: white;
 } */
@@ -182,6 +203,11 @@ Set box-sizing: border-box to take margin/padding/border into account for the to
   grid-row: 2/3;
   line-height: 50px;
 }
+.item-price {
+	grid-column: 2/3;
+	grid-row: 2/3;
+	line-height: 50px;
+}
 .item-subtotal {
   grid-column: 4/5;
   grid-row: 2/3;
@@ -246,6 +272,15 @@ input[type="number"] {
   color: white;
   line-height: 40px;
 }
+.total-container {
+	/* margin-top: 20px; */
+	height: 0;
+	opacity: 0;
+	width: 100%;
+	color: white;
+	line-height: 40px;
+	background-color: black;
+}
 .cart-item * {
   height: 0;
   opacity: 0;
@@ -270,6 +305,11 @@ input[type="number"] {
 .cart-list.open .item-name,
 .cart-list.open .item-price {
   height: 50px;
+}
+.cart-list.open .item-subtotal,
+.cart-list.open .item-name,
+.cart-list.open .item-price {
+	height: 50px;
 }
 .cart-list.open .item-count {
   height: 30px;
@@ -302,6 +342,10 @@ input[type="number"] {
   opacity: 1;
   height: 40px;
 }
+.cart-list.open .total-container {
+	opacity: 1;
+	height: 40px;
+}
 /* Change cursor when hover over the menu */
 .cart-menu:hover {
   cursor: pointer;
@@ -316,6 +360,12 @@ input[type="number"] {
 }
 #header {
   margin-top: 10px;
+}
+.dollar {
+	font-size: 20px;
+}
+#header {
+	margin-top: 10px;
 }
 /* Formatting for the main area of the website */
 main {
@@ -405,6 +455,11 @@ p {
   color: black;
   font-weight: bold;
 }
+.in-cart {
+	pointer-events: none; /* Disable every event */
+	background: #212121;
+	color: white;
+}
 /* Desktop after mobile
   Target the screen of the device and apply the style when min-width is 500px */
 @media only screen and (min-width: 500px) {
@@ -464,22 +519,3 @@ p {
   }
 }
 
-.card-body {
-	color: white
-}
-
-.card {
-	background-color: black;
-}
-
-.dollar{
-	color: white;
-}
-
-.price {
-	color: white;
-}
-
-.card-sort {
-	margin: 5vw 0 0 5vw;
-}
