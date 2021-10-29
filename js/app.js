@@ -246,6 +246,7 @@ async function loadFile() {
   xhttp.open("GET", "test.xml");
   xhttp.send();
 }
+/*
 function sortCard() {
   var sort = card_sort.value;
   var i = 0,
@@ -286,7 +287,7 @@ function sortCard() {
       break;
     default:
   }
-}
+} */
 
 function start() {
   // Check user localStorage for previous selected item; if undefined, create a new item; else load the item
