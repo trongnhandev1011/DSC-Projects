@@ -129,7 +129,7 @@ function loadItems(file) {
     var empImg = document.createElement("div");
     empImg.className = "card-img";
     empImg.style.backgroundImage =
-      "url('../img/" + item.querySelector("ImageURI").innerHTML + "')";
+      "url('/DSC-Projects/img/" + item.querySelector("ImageURI").innerHTML + "')";
     empCard.appendChild(empImg);
     // Create Card Body
     var empBody = document.createElement("div");
