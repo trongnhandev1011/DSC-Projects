@@ -46,7 +46,6 @@ function getTotal() {
 function updateTotal() {
   document.querySelector(".cart-item-count").innerHTML = cartCount;
   document.querySelectorAll('.cart-item').forEach(function (item) {
-    console.log(item);
     item.querySelector('.item-subtotal').innerHTML = (item.querySelector('.quantity').value * item.querySelector('.item-price').innerHTML).toFixed(2);
     getTotal();
   });
@@ -82,6 +81,51 @@ function createContainer(className, id) {
   container.className = className;
   container.id = id;
   return container;
+}
+// Sort the card accordingly
+function sortCard() {
+  var sort = card_sort.value;
+  var i = 0, j = 0;
+  var cardList = card.querySelectorAll('.card');
+  var priceList = card.querySelectorAll('.price');
+  var nameList = card.querySelectorAll('h3');
+  switch (sort) {
+    case 'cheap-first':
+      for (i = 0; i < priceList.length; i++) {
+        for (j = i + 1; j < priceList.length; j++) {
+          if (+priceList[j].innerHTML < +priceList[i].innerHTML) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    case 'exp-first':
+      for (i = 0; i < priceList.length; i++) {
+        for (j = i + 1; j < priceList.length; j++) {
+          if (+priceList[j].innerHTML > +priceList[i].innerHTML) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    case 'alpha':
+      for (i = 0; i < nameList.length; i++) {
+        for (j = i + 1; j < nameList.length; j++) {
+          if (nameList[j].innerHTML.localeCompare(nameList[i].innerHTML) == -1) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    default:
+      for (i = 0; i < nameList.length; i++) {
+        for (j = i + 1; j < nameList.length; j++) {
+          if (+cardList[j].id.substr(2) < +cardList[i].id.substr(2)) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+  }
 }
 function loadItems(file) {
   var items = file.querySelectorAll("Book");
@@ -256,5 +300,6 @@ function start() {
   loadFile();
   // After the window has loaded, call these functions
   topDropDown();
+  card_sort.addEventListener('change', sortCard);
 }
 window.onload = start;

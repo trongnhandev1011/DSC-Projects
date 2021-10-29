@@ -216,6 +216,7 @@ input[type="number"] {
 	width: 100%;
 	color: white;
 	line-height: 40px;
+	background: black;
 }
 .cart-item * {
 	height: 0;
@@ -310,6 +311,18 @@ main {
 p {
 	margin: 10px auto;
 }
+.sort-container {
+	height: 10px;
+}
+.card-sort {
+	outline: none;
+	position: absolute;
+	margin: 10px 0;
+	right: 10px;
+	height: 35px;
+	border: 3px #ee4d2d solid;
+	border-radius: 8px;
+}
 /* Card formatting */
 /* Using flex-box to display cards in rows with auto wrapping */
 .card-container {
@@ -326,7 +339,8 @@ p {
 	border-radius: 5px;
 	width: 300px;
 	height: 400px;
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 1px 1px 10px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+		1px 1px 10px rgba(0, 0, 0, 0.2) inset;
 	transition: all 0.5s ease;
 }
 /* Responsive image */
@@ -376,7 +390,7 @@ p {
 }
 /* Desktop after mobile
   Target the screen of the device and apply the style when min-width is 500px */
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 630px) {
 	/* Hide the burger button */
 	.burger-menu {
 		display: none;
@@ -393,6 +407,7 @@ p {
 	/* Show the .nav-link and size them to 25% of the parent's width; allow them to shrink and grow accordingly */
 	.nav-link {
 		opacity: 1;
+		min-width: 125px;
 		height: 40px;
 		flex: 20%;
 		line-height: 40px;
@@ -415,7 +430,8 @@ p {
 		height: 100%;
 		border-radius: 5px;
 	}
-	.cart-item, .empty-item {
+	.cart-item,
+	.empty-item {
 		margin: 0 auto;
 		opacity: 0;
 		width: 96%;
