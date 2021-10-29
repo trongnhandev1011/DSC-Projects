@@ -1,12 +1,13 @@
 // Get all of the required elements
+var cartCount;
 const burger = document.querySelector(".burger-menu");
 const burgerList = document.querySelector(".nav-list");
 const cart = document.querySelector(".cart-menu");
 const cartList = document.querySelector(".cart-list");
 const buy = document.querySelectorAll(".card-buy");
 const card = document.querySelector(".card-container");
-var cartCount;
 const cartContainer = document.querySelector(".cart");
+const card_sort = document.querySelector(".card-sort");
 // If 0 item was loaded for the current user, add an placeholder <li> saying "Add something to your cart"
 function addEmpty() {
   var emptyText = document.createTextNode("Add something to your cart");
@@ -25,8 +26,6 @@ function checkEmpty() {
     addEmpty();
   }
 }
-
-var i = 0;
 function setStorage(id, count, cartCount) {
   document.querySelector(".cart-item-count").innerHTML = cartCount;
   localStorage.setItem("totalCount", cartCount);
@@ -34,6 +33,25 @@ function setStorage(id, count, cartCount) {
 }
 function loadStorage(id) {
   return +localStorage.getItem(id);
+}
+function getTotal() {
+  var total = 0;
+  var totalPrice = document.querySelector(".total");
+  var subTotalList = document.getElementsByClassName("item-subtotal");
+  for (let i = 0; i < subTotalList.length; i++) {
+    total += Number(subTotalList[i].innerHTML);
+  }
+  totalPrice.innerHTML = total.toFixed(2);
+}
+function updateTotal() {
+  document.querySelector(".cart-item-count").innerHTML = cartCount;
+  document.querySelectorAll(".cart-item").forEach(function (item) {
+    item.querySelector(".item-subtotal").innerHTML = (
+      item.querySelector(".quantity").value *
+      item.querySelector(".item-price").innerHTML
+    ).toFixed(2);
+    getTotal();
+  });
 }
 function topDropDown() {
   function clickDropDown(parent, list, otherList) {
@@ -54,15 +72,12 @@ function topDropDown() {
         document.querySelector(".overlay").style.height = "0";
         document.querySelector(".overlay").style.opacity = "0";
       }
-
-      if (i % 2 == 1) totalContainer.style.display = "none";
-      else totalContainer.style.display = "block";
-      i++;
     });
   }
-
   clickDropDown(burger, burgerList, cartList);
   clickDropDown(cart, cartList, burgerList);
+  // Every time cart is opened, update the subtotal and total
+  cart.addEventListener("click", updateTotal);
 }
 function createContainer(className, id) {
   var container = document.createElement("div");
@@ -101,7 +116,7 @@ function loadItems(file) {
     var dollarIcon = document.createElement("span");
     var empPrice = document.createElement("span");
     empPrice.className = "price";
-    dollarIcon.innerHTML = "$";
+    dollarIcon.innerHTML = "$ ";
     dollarIcon.className = "dollar";
     empPrice.innerHTML = item.querySelector("Price").innerHTML;
     priceContainer.appendChild(dollarIcon);
@@ -115,8 +130,7 @@ function loadItems(file) {
     empIcon.className = "fas fa-cart-plus";
     empBtn.appendChild(empIcon);
     empBtn.addEventListener("click", addToCart);
-    empBtn.addEventListener("click", Total);
-    
+    empBtn.addEventListener("click", getTotal);
     empFooter.appendChild(empBtn);
     empCard.appendChild(empFooter);
     // Add card to container
@@ -127,7 +141,6 @@ function loadItems(file) {
     }
   });
 }
-
 function addToCart() {
   if (cartCount == 0 && document.querySelector(".empty-item")) {
     document.querySelector(".empty-item").remove();
@@ -165,7 +178,6 @@ function addToCart() {
   itemName.className = "item-name";
   itemName.innerHTML = card.querySelector("h3").innerHTML;
   var itemPrice = document.createElement("span");
-  var itemPrice = document.createElement("span");
   itemPrice.className = "item-price";
   itemPrice.innerHTML = card.querySelector(".price").innerHTML;
   cartItem.appendChild(itemName);
@@ -178,10 +190,14 @@ function addToCart() {
   minusButton.addEventListener("click", function () {
     // Decrease the counter by 1
     this.parentNode.querySelector(".quantity").stepDown();
-    subTotal.innerHTML = (input.value * itemPrice.innerHTML).toFixed(2);
-    Total();
     // If cartCount is 0, stop reducing
     cartCount = cartCount ? --cartCount : 0;
+    // Update the subtotal and total of cart
+    // This is faster
+    subTotal.innerHTML = (input.value * itemPrice.innerHTML).toFixed(2);
+    // This is slower
+    // updateTotal();
+    getTotal();
     // Update the local storage
     setStorage(card.id, input.value, cartCount);
     // If the item has 0 item, remove it from the cart; add empty if necessary
@@ -192,15 +208,18 @@ function addToCart() {
       checkEmpty();
     }
   });
-
   var plusButton = document.createElement("button");
   plusButton.className = "plus";
   plusButton.addEventListener("click", function () {
     // Increase the counter by 1
     this.parentNode.querySelector(".quantity").stepUp();
     cartCount++;
+    // Update the subtotal and total of cart
+    // This is faster
     subTotal.innerHTML = (input.value * itemPrice.innerHTML).toFixed(2);
-    Total();
+    // This is slower
+    // updateTotal();
+    getTotal();
     // Update the local storage
     setStorage(card.id, input.value, cartCount);
   });
@@ -208,7 +227,7 @@ function addToCart() {
   itemCount.appendChild(input);
   itemCount.appendChild(plusButton);
   cartItem.appendChild(itemCount);
-  //
+  // Item subtotal
   var total = document.createElement("div");
   var subTotal = document.createElement("div");
   subTotal.className = "item-subtotal";
@@ -217,27 +236,6 @@ function addToCart() {
   cartItem.appendChild(total);
   cartList.appendChild(cartItem);
 }
-
-var totalContainer = document.createElement("div");
-totalContainer.className = "total-container";
-var totalText = document.createElement("span");
-var totalPrice = document.createElement("span");
-totalText.innerHTML = "TOTAL: ";
-
-Total = function () {
-  var subTotalList = document.getElementsByClassName("item-subtotal");
-  var Total = 0;
-  for (let i = 0; i < subTotalList.length; i++) {
-    Total += Number(subTotalList[i].innerHTML);
-  }
-  totalPrice.innerHTML = Total.toFixed(2);
-};
-
-// totalPrice.innerHTML =
-totalContainer.appendChild(totalText);
-totalContainer.appendChild(totalPrice);
-cartList.appendChild(totalContainer);
-
 async function loadFile() {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -248,6 +246,47 @@ async function loadFile() {
   xhttp.open("GET", "test.xml");
   xhttp.send();
 }
+function sortCard() {
+  var sort = card_sort.value;
+  var i = 0,
+    j = 0;
+  var cardList = card.querySelectorAll(".card");
+  var priceList = card.querySelectorAll(".price");
+  var nameList = card.querySelectorAll("h3");
+  switch (sort) {
+    case "cheap-first":
+      for (i = 0; i < priceList.length; i++) {
+        for (j = i + 1; j < priceList.length; j++) {
+          if (+priceList[j].innerHTML < +priceList[i].innerHTML) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    case "exp-first":
+      for (i = 0; i < priceList.length; i++) {
+        for (j = i + 1; j < priceList.length; j++) {
+          if (+priceList[j].innerHTML > +priceList[i].innerHTML) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    case "alpha":
+      for (i = 0; i < nameList.length; i++) {
+        for (j = i + 1; j < nameList.length; j++) {
+          if (
+            nameList[j].innerHTML.localeCompare(nameList[i].innerHTML) == -1
+          ) {
+            card.insertBefore(cardList[j], cardList[i]);
+          }
+        }
+      }
+      break;
+    default:
+  }
+}
+
 function start() {
   // Check user localStorage for previous selected item; if undefined, create a new item; else load the item
   if (localStorage.getItem("totalCount") == undefined) {
@@ -258,8 +297,8 @@ function start() {
   }
   checkEmpty();
   loadFile();
-  document.querySelector(".cart-item-count").innerHTML = cartCount;
   // After the window has loaded, call these functions
   topDropDown();
+  card_sort.addEventListener("change", sortCard);
 }
 window.onload = start;
