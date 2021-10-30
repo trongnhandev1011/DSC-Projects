@@ -66,12 +66,14 @@ function topDropDown() {
         // Show the overlay
         document.querySelector(".overlay").style.height = "99vh";
         document.querySelector(".overlay").style.opacity = "0.7";
+        exitButton.style.display = "block";
       } else {
         // Else, close it
         list.classList.remove("open");
         // Remove the overlay
         document.querySelector(".overlay").style.height = "0";
         document.querySelector(".overlay").style.opacity = "0";
+        exitButton.style.display = "none";
       }
     });
   }
