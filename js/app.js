@@ -8,6 +8,7 @@ const buy = document.querySelectorAll(".card-buy");
 const card = document.querySelector(".card-container");
 const cartContainer = document.querySelector(".cart");
 const card_sort = document.querySelector(".card-sort");
+const exitButton = document.querySelector(".fa-times-circle");
 // If 0 item was loaded for the current user, add an placeholder <li> saying "Add something to your cart"
 function addEmpty() {
   var emptyText = document.createTextNode("Add something to your cart");
@@ -76,8 +77,10 @@ function topDropDown() {
   }
   clickDropDown(burger, burgerList, cartList);
   clickDropDown(cart, cartList, burgerList);
+  clickDropDown(exitButton, burgerList, cartList)
   // Every time cart is opened, update the subtotal and total
   cart.addEventListener("click", updateTotal);
+  exitButton.addEventListener("click", updateTotal);
 }
 function createContainer(className, id) {
   var container = document.createElement("div");
