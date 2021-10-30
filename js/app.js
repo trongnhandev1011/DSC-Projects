@@ -77,7 +77,7 @@ function topDropDown() {
   }
   clickDropDown(burger, burgerList, cartList);
   clickDropDown(cart, cartList, burgerList);
-  clickDropDown(exitButton, burgerList, cartList)
+  clickDropDown(exitButton, cartList, burgerList);
   // Every time cart is opened, update the subtotal and total
   cart.addEventListener("click", updateTotal);
   exitButton.addEventListener("click", updateTotal);
