@@ -22,6 +22,21 @@ main {
 	margin: 0 0 0 5vw;
 }
 
+.total-container {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+}
+
+.price-container {
+    grid-column: 2/4;
+}
+
+.fa-times-circle {
+    grid-column: 4/5;
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
 
 /* .card-container {
 	background-color: white;
