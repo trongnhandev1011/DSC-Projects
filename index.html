@@ -16,13 +16,14 @@
     <header>
       <div class="top-bar">
         <h1 class="fries">DSC SHOP</h1>
+
         <nav>
           <button class="burger-menu"><i class="fas fa-bars"></i></button>
           <ul class="nav-list">
             <li class="nav-link bun"><a>HOME</a></li>
             <li class="nav-link tomato"><a>SALE 99%</a></li>
             <li class="nav-link patty"><a>GAME</a></li>
-            <li class="nav-link salad"><a>HOT PRODUCT</a></li>
+            <li class="nav-link salad"><a>BESTSELLER</a></li>
             <li class="nav-link bun">CONTACT</li>
           </ul>
         </nav>
@@ -43,23 +44,31 @@
     </header>
     <main>
       <div class="overlay"></div>
-      <h1 id = "header">SHOPPING CART</h1>
-      <p class="main-article">
+      <div class="banner">
+        <div>
+          <h1 id="header">SHOPPING CART</h1>
+        </div>
+        <img
+          id="banner"
+          src="img\Flagship_100_Blog_2880x1800_Apparel.jpg"
+          alt=""
+        />
+      </div>
+      <select class="card-sort" name="sort">
+        <option value="default">Default</option>
+        <option value="cheap-first">Lowest to Highest price</option>
+        <option value="exp-first">Highest to Lowest price</option>
+        <option value="alpha">Alphabetically</option>
+      </select>
+
+      <!-- <p class="main-article">
         Welcome to our project Shopping Cart !!!
       </p>
       <p class="main-article">
         Author: Trong Nhan, Gia Khanh - FrontEnd lv 2 
-      </p>
-      <div class="sort-container">
-        <select class="card-sort" name="sort">
-          <option value="default">Default</option>
-          <option value="cheap-first">Lowest to Highest price</option>
-          <option value="exp-first">Highest to Lowest price</option>
-          <option value="alpha">Alphabetically</option>
-        </select>
-      </div>
-      <div class="card-container">
-      </div>
+      </p> -->
+
+      <div class="card-container"></div>
     </main>
     <script src="js/app.js"></script>
   </body>

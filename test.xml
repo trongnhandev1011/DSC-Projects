@@ -42,4 +42,34 @@
       <Description>An in-depth look at creating applications
       with XML.</Description>
    </Book>
+      <Book id="bk105">
+      <Author>Garghentini, Davide</Author>
+      <Title>XML Developer's Guide</Title>
+      <ImageURI>fox.png</ImageURI>
+      <Genre>Computer</Genre>
+      <Price>44.95</Price>
+      <PublishDate>2000-10-01</PublishDate>
+      <Description>An in-depth look at creating applications
+      with XML.</Description>
+   </Book>
+      <Book id="bk106">
+      <Author>Garghentini, Davide</Author>
+      <Title>XML Developer's Guide</Title>
+      <ImageURI>fox.png</ImageURI>
+      <Genre>Computer</Genre>
+      <Price>44.95</Price>
+      <PublishDate>2000-10-01</PublishDate>
+      <Description>An in-depth look at creating applications
+      with XML.</Description>
+   </Book>
+      <Book id="bk107">
+      <Author>Garghentini, Davide</Author>
+      <Title>XML Developer's Guide</Title>
+      <ImageURI>fox.png</ImageURI>
+      <Genre>Computer</Genre>
+      <Price>44.95</Price>
+      <PublishDate>2000-10-01</PublishDate>
+      <Description>An in-depth look at creating applications
+      with XML.</Description>
+   </Book>
 </Catalog>
